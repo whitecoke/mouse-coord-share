@@ -1,0 +1,31 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "01 마우스 좌표 출력 테스트",
+			"type": "process",
+			"command": "chrome",
+			"windows": {
+				"command": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"
+			},
+			"args": [ "C:\\MIDAS\\testDev\\mouse-coord-share\\01-mouseCoordStatic\\index.html" ],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			}
+		},
+		{
+			"label": "02 로컬 서버를 이용한 마우스 출력",
+			"type": "deno",
+			"command": "run",
+			"problemMatcher": [
+				"$deno"
+			],
+			"args": [
+				"--allow-all",
+				"--unstable",
+				"./02-server/server.ts",
+			]
+		},
+	]
+}
