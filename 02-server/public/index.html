@@ -12,31 +12,24 @@
         <div id="user">userName</div>
         <div id="users"></div>
         <script>
-            function changeCoordString(x, y) {
+            window.addEventListener('mousemove', async (e) => {
+                const x = e.pageX;
+                const y = e.pageY;
                 document.getElementById("coord").innerHTML = `x: ${x}, y: ${y}`;
-              };
-              
-            function changeUserName() {
-                const query = new URLSearchParams(window.location.search);
-                const userName = query.get("name");
-                if (userName === null) document.getElementById("user").innerHTML = "undefined";
-                else                   document.getElementById("user").innerHTML = userName;
-            }
-                
-            async function mousemove(event) {
-                const x = event.pageX;
-                const y = event.pageY;
-                changeCoordString(x, y);
                 
                 const userName = document.getElementById("user").innerHTML;
                 if (userName === null) throw "";
                 await fetch(`http://localhost:8000/coord?name=${userName}&x=${x}&y=${y}`, {
                     method: "put"
                 });
-            };
-            
-            window.addEventListener('mousemove', mousemove);
-            window.onload = changeUserName();
+            });
+
+            window.onload = () => {
+                const query = new URLSearchParams(window.location.search);
+                const userName = query.get("name");
+                if (userName === null) document.getElementById("user").innerHTML = "undefined";
+                else                   document.getElementById("user").innerHTML = userName;
+            }
 
             setInterval(async () => {
                 const curUserName = document.getElementById("user").innerHTML;

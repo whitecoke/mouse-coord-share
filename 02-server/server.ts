@@ -11,9 +11,6 @@ const coordinations = new Map<string, [number, number]>();
 const router = new Router();
 router
   .redirect("/", "/public")
-  // .get("/", (context: Context) => {
-  //   context.response.redirect("/public");
-  // })
   .put("/coord", (context: Context) => {
     //url에서 query "name", "x", "y"에 대한 문자열을 추출합니다.
     const userName = context.request.url.searchParams.get("name");

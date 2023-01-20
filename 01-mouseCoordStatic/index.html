@@ -10,15 +10,9 @@
     <body>
         <div id="coord" />
         <script>
-            function changeCoordString(x, y) {
-                document.getElementById("coord").innerHTML = `x: ${x}, y: ${y}`;
-            };
-            
-            function mousemove(event) {
-                changeCoordString(event.pageX, event.pageY);
-            };
-            
-            window.addEventListener('mousemove', mousemove);
+            window.addEventListener('mousemove', (e) => 
+                document.getElementById("coord").innerHTML = `x: ${e.pageX}, y: ${e.pageY}`
+            );
         </script>
     </body>
 </html>
