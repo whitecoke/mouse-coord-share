@@ -1,0 +1,10 @@
+###
+PUT http://localhost:8000/coord?name=test&x=72&y=10 HTTP/1.1
+//좌표 정보를 업데이트 합니다.
+
+###
+GET http://localhost:8000/coord HTTP/1.1
+//좌표 정보를 가져옵니다.
+
+###
+GET http://localhost:8000 HTTP/1.1
