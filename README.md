@@ -1,7 +1,7 @@
 # mouse-coord-share
 마우스 커서 공유에 대한 brute force idea
 
-```json
+```
 javascript
 typescript
 deno
