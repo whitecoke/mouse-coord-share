@@ -1,0 +1,23 @@
+  .get("/coord", (context) => {
+    //반환 - server에 저장되어 있는 좌표 정보를 응답 합니다.
+    const res: any[] = [];
+    coords.forEach((coordinations, userName) => {
+      res.push({ userName: userName, coordinations: coordinations });
+    });
+
+    context.response.body = res;
+  });
+
+//로그에 새로운 힘을 부여 + 저장기능 + 가져오기기능
+const startLog = `
+%cHello Deno!
+    + 저장기능       __
+    + 가져오기기능  / _)
+          _.----._/ /
+          /         /
+      __/ (  | (  |
+      /__.-'|_|--|_|
+
+로컬 서버가 시작 되었습니다.
+`
+console.log(startLog, 'color:green');

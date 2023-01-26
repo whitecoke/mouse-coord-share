@@ -1,0 +1,22 @@
+import { Application } from "https://deno.land/x/oak@v10.5.1/mod.ts";
+
+//Application 생성
+const app = new Application();
+
+//미들웨어 추가
+app.use((context) => context.response.body = "Hello Deno!");
+
+//서버 listen (ON)
+const startLog = `
+Hello Deno!
+                    __
+                   / _)
+          _.----._/ /
+          /         /
+      __/ (  | (  |
+      /__.-'|_|--|_|
+
+로컬 서버가 시작 되었습니다.
+`
+console.log(startLog);
+await app.listen({ port: 8000 });

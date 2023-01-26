@@ -1,0 +1,6 @@
+//import 구문에 fileService를 위한 send module 추가
+import { send } from "https://deno.land/x/oak@v10.5.1/mod.ts";
+
+  .get("/", async (context) => {
+    await send(context, "./test.html", { root : Deno.cwd() });
+  })

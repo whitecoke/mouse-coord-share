@@ -1,0 +1,5 @@
+###
+PUT http://localhost:8000/coord?name=Walter&x=100&y=100
+
+###
+PUT http://localhost:8000/coord?name=Ryan&x=200&y=200

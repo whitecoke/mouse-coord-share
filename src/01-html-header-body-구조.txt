@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>마우스 위치 공유</title>
+  </head>
+  <body>
+    <div>마우스 위치를 공유 합니다.</div>
+  </body>
+</html>

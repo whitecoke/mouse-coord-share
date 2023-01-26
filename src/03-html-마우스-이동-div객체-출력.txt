@@ -1,0 +1,6 @@
+<div id="coord">마우스 위치를 공유 합니다.</div>
+<script>
+    window.addEventListener('mousemove', (e) => 
+        document.getElementById("coord").innerHTML = `x: ${e.pageX}, y: ${e.pageY}`
+    );
+</script>

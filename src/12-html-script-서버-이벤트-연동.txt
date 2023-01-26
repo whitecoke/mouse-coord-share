@@ -1,0 +1,60 @@
+<!-- 새로운 div 객체들을 추가 합니다. -->
+<div id="coord">coordinations</div>
+<div id="user">userName</div>
+<div id="user-mouse-cursors"></div>
+
+// 마우스 위치가 변경 될 때, 
+// http 프로토콜을 통해 테스트 했던 PUT (저장기능)을 추가 합니다.
+window.addEventListener('mousemove', async (e) => {
+    const x = e.pageX;
+    const y = e.pageY;
+    document.getElementById("coord").innerHTML = `x: ${x}, y: ${y}`;
+    
+    const userName = document.getElementById("user").innerHTML;
+    if (userName === null) throw "";
+    await fetch(`http://localhost:8000/coord?name=${userName}&x=${x}&y=${y}`, {
+        method: "put"
+    });
+});
+
+// 브라우져가 초기화 onLoad 될 때,
+// url의 query에 따라 div 객체에 값을 변경 합니다.
+window.onload = () => {
+    const query = new URLSearchParams(window.location.search);
+    const userName = query.get("name");
+    if (userName === null) document.getElementById("user").innerHTML = "undefined";
+    else                   document.getElementById("user").innerHTML = userName;
+}
+
+// 일정한 간격으로 좌표 정보를 가져와서
+// 내가 아닌 다른 사용자의 마우스 커서를 출력합니다.
+setInterval(async () => {
+  const query = new URLSearchParams(window.location.search);
+  const curUserName = query.get("name");
+
+  // 서버에 저장된 결과를 가져 옵니다.
+  const res = await fetch("http://localhost:8000/coord");
+  const users = await res.json();
+  for (const user of users) {
+    if (user.userName === "userName" ) continue;
+    if (user.userName === curUserName) continue;
+    const userDiv = document.getElementById(user.userName);
+    if (!userDiv) {
+      // div 객체가 없으면 새로 생성합니다
+        const div = document.createElement("div");
+        div.id        = user.userName;
+        div.innerHTML = `
+            <img src="https://cdn-icons-png.flaticon.com/512/889/889817.png" width="30px" height="30px" />
+            ${user.userName}
+        `;
+        div.style.position = "absolute";
+        div.style.left = `${user.coordinations[0]}px`;
+        div.style.top  = `${user.coordinations[1]}px`;
+        document.querySelector("#user-mouse-cursors").appendChild(div);
+    } else {
+      // div 객체가 있으면 div객체의 위치만 변경 합니다.
+        userDiv.style.left = `${user.coordinations[0]}px`;
+        userDiv.style.top  = `${user.coordinations[1]}px`;
+    }
+  }
+}, 50);
