@@ -2,7 +2,7 @@
 	"version": "2.0.0",
 	"tasks": [
 		{
-			"label": "test HTML",
+			"label": "01-test-HTML",
 			"type": "process",
 			"command": "chrome",
 			"windows": {
@@ -15,7 +15,7 @@
 			}
 		},
 		{
-			"label": "test Typescript",
+			"label": "02-test-Typescript",
 			"type": "deno",
 			"command": "run",
 			"problemMatcher": [
@@ -28,13 +28,39 @@
 			]
 		},
 		{
-			"label": "localhost:8000",
+			"label": "03-localhost:8000",
 			"type": "process",
 			"command": "chrome",
 			"windows": {
 				"command": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"
 			},
 			"args": [ "http://localhost:8000" ],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			}
+		},
+		{
+			"label": "04-localhost:8000?name=walter",
+			"type": "process",
+			"command": "chrome",
+			"windows": {
+				"command": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"
+			},
+			"args": [ "http://localhost:8000?name=walter" ],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			}
+		},
+		{
+			"label": "05-localhost:8000?name=ryan",
+			"type": "process",
+			"command": "chrome",
+			"windows": {
+				"command": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"
+			},
+			"args": [ "http://localhost:8000?name=ryan" ],
 			"group": {
 				"kind": "build",
 				"isDefault": true

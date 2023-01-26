@@ -1,8 +1,10 @@
-//Router에 대한 import 구문 추가
-import { Router } from "https://deno.land/x/oak@v10.5.1/mod.ts";
+import { Application, Router, send } from "https://deno.land/x/oak@v10.5.1/mod.ts";
 
 //좌표를 저장 할 Container 추가 User String - x, y
 const coords = new Map<string, [number, number]>();
+
+//Application 생성
+const app = new Application();
 
 //미들웨어 교체 - Router로!
 const router = new Router();
@@ -27,17 +29,29 @@ router
       }
     }
   })
+  .get("/coord", (context) => {
+    //반환 - server에 저장되어 있는 좌표 정보를 응답 합니다.
+    const res: any[] = [];
+    coords.forEach((coordinations, userName) => {
+      res.push({ userName: userName, coordinations: coordinations });
+    });
+
+    context.response.body = res;
+  })
+  .get("/", async (context) => {
+    await send(context, "./test.html", { root : Deno.cwd() });
+  })
 
 //Application에 새로운 미들웨어(router) 추가
 //모든 Method를 허용하겠다 선언
 app.use(router.routes());
 app.use(router.allowedMethods());
 
-//로그에 새로운 힘을 부여 + 저장기능
+//로그에 새로운 힘을 부여 + 저장기능 + 가져오기기능
 const startLog = `
 %cHello Deno!
     + 저장기능       __
-                   / _)
+    + 가져오기기능  / _)
           _.----._/ /
           /         /
       __/ (  | (  |
@@ -45,4 +59,5 @@ const startLog = `
 
 로컬 서버가 시작 되었습니다.
 `
-console.log(startLog, 'color:yellow');
+console.log(startLog, 'color:green');
+await app.listen({ port: 8000 });

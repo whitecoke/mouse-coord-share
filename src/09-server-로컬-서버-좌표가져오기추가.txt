@@ -6,7 +6,7 @@
     });
 
     context.response.body = res;
-  });
+  })
 
 //로그에 새로운 힘을 부여 + 저장기능 + 가져오기기능
 const startLog = `
